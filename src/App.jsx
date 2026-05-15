@@ -1,6 +1,6 @@
 import { useState } from "react";
 import questions from "./data/questions";
-import quiz from "./components/Quiz";
+import Quiz from "./components/Quiz";
 import result from "./components/Result";
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
     const next = current + 1;
     if (next < questions.length) {
       setCurrent(next);
-      setFinished(true);
+      setFinished(false);
     } else {
       setFinished(true);
     }
