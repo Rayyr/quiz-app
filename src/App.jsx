@@ -19,12 +19,25 @@ function App() {
     }
   };
 
+
+  const restartQuiz=()=>{
+
+    setCurrent(0);
+    setFinished(false);
+    setScore(0);
+  };
+
   return (
     <div>
       <h1>Quiz App</h1>
+
+      <button onClick={restartQuiz}>Restart Quiz</button>
+
       {finished ? (
+        
         <p>your score={score}</p>
-      ) : (
+     
+        ) : (
         <Quiz questionData={questions[current]} onAnswer={handleAnswer} />
       )}
     </div>
