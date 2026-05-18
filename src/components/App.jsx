@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { quiz } from './data/data.ts';
-import QuizOption from './components/quizOption.jsx';
+import { quiz } from '../data/data.ts';
+import QuizOption from './quizOption.jsx';
 
-const App = () => {
+const App = ({ onGoHome }) => {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
-  const [timer, setTimer] = useState(10);
+  const [timer, setTimer] = useState(quiz.totalTime);
   const [score,setScore]=useState(0);
   const [finished,setFinished]=useState(false);
 
@@ -45,7 +45,7 @@ const App = () => {
     setFinished(false);
     setActiveQuestion(0);
     setScore(0);
-    setTimer(10);
+    setTimer(quiz.totalTime);
     setSelectedAnswerIndex(null);
   };
   
@@ -53,7 +53,7 @@ const App = () => {
 
   return (
     <div className="container py-5">
-      <h1 className="h3 text-white mb-4 text-center">Quiz App</h1>
+      <h1 className="h3 text-white mb-4 text-center">Quiz</h1>
    
 
       {finished ? (
@@ -61,6 +61,16 @@ const App = () => {
           <div className="card-body text-center">
             <h2 className="card-title mb-3">Quiz ended!</h2>
             <p className="fs-4 mb-3">Your score: {score} / {questions.length}</p>
+            <div className="d-flex gap-2 justify-content-center mt-4">
+              <button type="button" className="btn btn-primary" onClick={restartQuiz}>
+                Restart Quiz
+              </button>
+              {onGoHome && (
+                <button type="button" className="btn btn-secondary" onClick={onGoHome}>
+                  Go back to Home
+                </button>
+              )}
+            </div>
           </div>
         </div>
       ) : (
@@ -104,11 +114,7 @@ const App = () => {
         </div>
       )}
 
-      <div className="text-center mt-4">
-        <button type="button" className="btn btn-secondary" onClick={restartQuiz}>
-          Restart Quiz
-        </button>
-      </div>
+
     </div>
   );
 };
